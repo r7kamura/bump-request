@@ -39,7 +39,9 @@ or if you want to do it from CLI, use [GitHub CLI](https://cli.github.com/) like
 gh workflow run bump-request --field version=1.2.3
 ```
 
-After the action is complete, a new pull request is created.
+After the action is complete, a new pull request is created:
+
+![](images/pull-request.png)
 
 ## Inputs
 
