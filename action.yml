@@ -24,23 +24,24 @@ runs:
       shell: bash
     - name: Create pull request
       run: |
-        description=$(
+        response=$(
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -f tag_name='v${{ inputs.version }}' \
             -f target_commitish='${{ github.ref }}' \
-            --jq '.name + "\n\n" + .body' \
             /repos/${{ github.repository }}/releases/generate-notes
         )
+        title=$(echo "${response}" | jq -r '.name')
+        body=$(echo "${response}" | jq -r '.body')
         branch="bump-request-${GITHUB_RUN_ID}"
         git config user.name "${GITHUB_ACTOR}"
         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git switch --create "${branch}"
         git add .
-        git commit --message "${description}"
+        git commit --message "${title}"
         git push --set-upstream origin "${branch}"
-        gh pr create --fill ${{ inputs.gh_pr_create_options }}
+        gh pr create --body "${body}" --fill ${{ inputs.gh_pr_create_options }}
       env:
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
       shell: bash
