@@ -39,7 +39,7 @@ runs:
         git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
         git switch --create "${branch}"
         git add .
-        git commit --message "${title}"
+        git commit --message "Change version to ${{ inputs.version }}"
         git push --set-upstream origin "${branch}"
         gh pr create --body "${body}" --fill ${{ inputs.gh_pr_create_options }}
       env:
