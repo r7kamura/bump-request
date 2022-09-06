@@ -43,6 +43,11 @@ After the action is complete, a new pull request is created:
 
 ![](images/pull-request.png)
 
+This action uses [Automatically generated release notes](https://docs.github.com/en//repositories/releasing-projects-on-github/automatically-generated-release-notes) to generate a pull request description.
+If you want to customize the contents, try setting up `.github/release.yml` according to this documentation.
+
+This action simply creates a pull request and does nothing more. If you want to automate package publishing, Git tagging, etc., it is recommended to prepare a separate workflow that detects changes in the file containing the version and does so, using [softprops/action-gh-release](https://github.com/softprops/action-gh-release) or other actions.
+
 ## Inputs
 
 ### `command`
