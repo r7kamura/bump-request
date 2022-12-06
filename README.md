@@ -29,6 +29,10 @@ jobs:
           version: ${{ inputs.version }}
 ```
 
+Then allow your repository to create pull requests from GitHub Actions:
+
+![](images/workflow-permissions.png)
+
 Now you can run it manually via actions page:
 
 ![](images/workflow.png)
