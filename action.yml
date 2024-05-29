@@ -4,10 +4,6 @@ inputs:
   command:
     description: Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc.
     required: true
-  gh_pr_create_options:
-    description: Additional options for `gh pr create` command.
-    required: false
-    default: ""
   github_token:
     description: GitHub access token.
     required: false
@@ -22,26 +18,10 @@ runs:
       run: |
         ${{ inputs.command }}
       shell: bash
-    - name: Create pull request
-      run: |
-        response=$(
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -f tag_name='v${{ inputs.version }}' \
-            -f target_commitish='${{ github.ref }}' \
-            /repos/${{ github.repository }}/releases/generate-notes
-        )
-        title=$(echo "${response}" | jq -r '.name')
-        body=$(echo "${response}" | jq -r '.body')
-        branch="bump-request-${GITHUB_RUN_ID}"
-        git config user.name "${GITHUB_ACTOR}"
-        git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-        git switch --create "${branch}"
-        git add .
-        git commit --message "Change version to ${{ inputs.version }}"
-        git push --set-upstream origin "${branch}"
-        gh pr create --body "${body}" --fill ${{ inputs.gh_pr_create_options }}
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - run: deno run --allow-all main.ts
       env:
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
       shell: bash
