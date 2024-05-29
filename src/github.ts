@@ -1,5 +1,5 @@
 import { github } from "./deps.ts";
-import { performance } from "node:perf_hooks";
+import { Performance, performance } from "node:perf_hooks";
 
 // Workaround for deno compatibility issue on undici:
 // deno-lint-ignore no-explicit-any
@@ -29,6 +29,7 @@ export function generateNotes({
   );
 }
 
+import { Performance, performance } from "node:perf_hooks";
 export async function createPullRequest({
   githubToken,
   owner,

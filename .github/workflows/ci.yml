@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v1
+      - uses: r7kamura/setup-deno@problem-matchers
         with:
           deno-version: v1.x
       - run: deno fmt --check src/**/*.ts
