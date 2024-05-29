@@ -13,7 +13,8 @@ import github from "https://esm.sh/@actions/github@6.0.0?dts";
 //     at processTicksAndRejections (ext:deno_node/_next_tick.ts:39:10)
 //     at runNextTicks (ext:deno_node/_next_tick.ts:48:3)
 //     at eventLoopTick (ext:core/01_core.js:175:21)
-import { performance } from "node:perf_hooks";
+import { Performance, performance } from "node:perf_hooks";
+
 globalThis.performance = performance;
 
 const githubToken = Deno.env.get("GITHUB_TOKEN")!;
