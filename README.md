@@ -81,10 +81,3 @@ Version to change to.
 
 - required
 - e.g. `1.2.3`
-
-### `gh_pr_create_options`
-
-Additional options for `gh pr create` command.
-
-- optional
-- e.g. `--draft`
