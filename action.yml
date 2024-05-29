@@ -2,10 +2,10 @@ name: bump-request
 description: Create a pull request that bumps version.
 inputs:
   command:
-    descriotion: Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc.
+    description: Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc.
     required: true
   gh_pr_create_options:
-    desecription: Additional options for `gh pr create` command.
+    description: Additional options for `gh pr create` command.
     required: false
     default: ""
   github_token:
