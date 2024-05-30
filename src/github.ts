@@ -52,9 +52,13 @@ export async function createPullRequest({
       owner,
       repo,
       title,
-      body,
       head,
       base,
+      body: preventMention(body),
     },
   );
+}
+
+function preventMention(text: string) {
+  return text.replace(/@/g, "@\u200B");
 }
