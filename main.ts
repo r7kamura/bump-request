@@ -1,5 +1,5 @@
-import exec from "https://esm.sh/@actions/exec@1.1.1?dts";
-import github from "https://esm.sh/@actions/github@6.0.0?dts";
+import { exec } from "./deps.ts";
+import { github } from "./deps.ts";
 
 // Workaround for the following error:
 //
@@ -14,7 +14,8 @@ import github from "https://esm.sh/@actions/github@6.0.0?dts";
 //     at runNextTicks (ext:deno_node/_next_tick.ts:48:3)
 //     at eventLoopTick (ext:core/01_core.js:175:21)
 import { performance } from "node:perf_hooks";
-globalThis.performance = performance;
+// deno-lint-ignore no-explicit-any
+(globalThis as any).performance = performance;
 
 const githubToken = Deno.env.get("GITHUB_TOKEN")!;
 const version = Deno.env.get("BUMP_REQUEST_INPUTS_VERSION")!;
