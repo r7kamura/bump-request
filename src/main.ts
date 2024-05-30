@@ -28,11 +28,7 @@ await createPullRequest({
   owner: github.context.repo.owner,
   repo: github.context.repo.repo,
   title,
-  body: preventMention(response.data.body),
+  body: response.data.body,
   head: branch,
   base: github.context.ref,
 });
-
-function preventMention(text: string) {
-  return text.replace(/@/g, "@\u200B");
-}
