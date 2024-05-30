@@ -21,7 +21,7 @@ runs:
     - uses: denoland/setup-deno@v1
       with:
         deno-version: v1.x
-    - run: deno run --allow-all main.ts
+    - run: deno run --allow-all src/main.ts
       env:
         BUMP_REQUEST_INPUTS_VERSION: ${{ inputs.version }}
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
