@@ -42,7 +42,7 @@ await createPullRequest({
   owner: github.context.repo.owner,
   repo: github.context.repo.repo,
   title,
-  body: response.data.body,
+  body: preventMention(response.data.body),
   head: branch,
   base: github.context.ref,
 });
@@ -120,4 +120,8 @@ async function createAndPushCommit({
   await exec.exec("git", ["add", ...files]);
   await exec.exec("git", ["commit", "--message", message]);
   await exec.exec("git", ["push", "--set-upstream", "origin", branch]);
+}
+
+function preventMention(text: string) {
+  return text.replace(/@/g, "@\u200B");
 }
