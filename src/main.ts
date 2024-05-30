@@ -1,15 +1,11 @@
-import { exec } from "./deps.ts";
 import { github } from "./deps.ts";
 import { createAndPushCommit } from "./git.ts";
 import { createPullRequest, generateNotes } from "./github.ts";
 
 const githubToken = Deno.env.get("GITHUB_TOKEN")!;
-const command = Deno.env.get("BUMP_REQUEST_INPUTS_COMMAND")!;
 const version = Deno.env.get("BUMP_REQUEST_INPUTS_VERSION")!;
 const branch = `bump-request-${github.context.runId}`;
 const title = `Change version to ${version}`;
-
-await exec.exec(command);
 
 const response = await generateNotes({
   githubToken: githubToken,
