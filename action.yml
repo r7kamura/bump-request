@@ -14,12 +14,15 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v3
+    - name: Run command
+      run: |
+        ${{ inputs.command }}
+      shell: bash
     - uses: denoland/setup-deno@v1
       with:
         deno-version: v1.x
     - run: deno run --allow-all src/main.ts
       env:
-        BUMP_REQUEST_INPUTS_COMMAND: ${{ inputs.command }}
         BUMP_REQUEST_INPUTS_VERSION: ${{ inputs.version }}
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
       shell: bash
