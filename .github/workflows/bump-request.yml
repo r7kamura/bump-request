@@ -21,3 +21,4 @@ jobs:
           command: |
             sed -i -r "s/([0-9]+\.[0-9]+\.[0-9]+)/${{ inputs.version }}/" VERSION
           version: ${{ inputs.version }}
+          release_type: ${{ inputs.release_type }}
