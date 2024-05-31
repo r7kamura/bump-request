@@ -3,10 +3,13 @@ name: bump-request
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: Version to change to.
-        required: true
-        type: string
+      release_type:
+        type: choice
+        description: How to bump the version.
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   run:

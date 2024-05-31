@@ -13,10 +13,13 @@ name: bump-request
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: Version to change to.
-        required: true
-        type: string
+      release_type:
+        type: choice
+        description: How to bump the version.
+        options:
+          - major
+          - minor
+          - patch
 
 jobs:
   run:
@@ -75,9 +78,18 @@ command: |
   bundle install
 ```
 
+### `release_type`
+
+How to bump the version.
+
+One of:
+
+- `major`
+- `minor`
+- `patch`
+
 ### `version`
 
-Version to change to.
+You can also specify this directly instead of `release_type`.
 
-- required
 - e.g. `1.2.3`

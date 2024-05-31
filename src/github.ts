@@ -59,6 +59,24 @@ export async function createPullRequest({
   );
 }
 
+export async function fetchLatestRelease({
+  githubToken,
+  owner,
+  repo,
+}: {
+  githubToken: string;
+  owner: string;
+  repo: string;
+}) {
+  return await github.getOctokit(githubToken).request(
+    "GET /repos/{owner}/{repo}/releases/latest",
+    {
+      owner,
+      repo,
+    },
+  );
+}
+
 function preventMention(text: string) {
   return text.replace(/@/g, "@\u200B");
 }
