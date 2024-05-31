@@ -44,7 +44,7 @@ Now you can run it manually via actions page:
 or if you want to do it from CLI, use [GitHub CLI](https://cli.github.com/) like this:
 
 ```bash
-gh workflow run bump-request --field version=1.2.3
+gh workflow run bump-request --field request_type=patch
 ```
 
 After the action is complete, a new pull request is created:
