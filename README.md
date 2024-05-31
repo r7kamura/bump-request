@@ -75,7 +75,7 @@ Ruby gem example:
 
 ```yaml
 command: |
-  sed -i -r "s/[0-9]+\.[0-9]+\.[0-9]+/${{ inputs.version }}/" lib/my_ruby_gem/version.rb
+  sed -i -r "s/[0-9]+\.[0-9]+\.[0-9]+/$VERSION/" lib/my_ruby_gem/version.rb
   bundle install
 ```
 
