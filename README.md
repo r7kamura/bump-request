@@ -20,6 +20,7 @@ on:
           - major
           - minor
           - patch
+        default: patch
 
 jobs:
   run:
