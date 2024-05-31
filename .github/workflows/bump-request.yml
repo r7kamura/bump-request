@@ -20,6 +20,5 @@ jobs:
       - uses: ./
         with:
           command: |
-            sed -i -r "s/([0-9]+\.[0-9]+\.[0-9]+)/${{ inputs.version }}/" VERSION
-          version: ${{ inputs.version }}
+            sed -i -r "s/([0-9]+\.[0-9]+\.[0-9]+)/$VERSION/" VERSION
           release_type: ${{ inputs.release_type }}

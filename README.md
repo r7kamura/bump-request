@@ -29,8 +29,8 @@ jobs:
       - uses: r7kamura/bump-request@v0
         with:
           command: |
-            npm version --no-git-commit-hooks --no-git-tag-version "${{ inputs.version }}"
-          version: ${{ inputs.version }}
+            npm version --no-git-commit-hooks --no-git-tag-version "$VERSION"
+          release_type: ${{ inputs.release_type }}
 ```
 
 Then allow your repository to create pull requests from GitHub Actions:
@@ -60,7 +60,7 @@ This action simply creates a pull request and does nothing more. If you want to 
 
 ### `command`
 
-Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc.
+Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc. Note that the next version is passed as an environment variable `VERSION`.
 
 - required
 
@@ -68,7 +68,7 @@ NPM package example:
 
 ```yaml
 command: |
-  npm version --no-git-commit-hooks --no-git-tag-version "${{ inputs.version }}"
+  npm version --no-git-commit-hooks --no-git-tag-version "$VERSION"
 ```
 
 Ruby gem example:
