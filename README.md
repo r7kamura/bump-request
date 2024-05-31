@@ -89,6 +89,9 @@ One of:
 - `minor`
 - `patch`
 
+The next version is calculated based on the latest GitHub release,
+so your repository must manage its versions with GitHub releases.
+
 ### `version`
 
 You can also specify this directly instead of `release_type`.
