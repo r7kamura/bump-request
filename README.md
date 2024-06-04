@@ -39,12 +39,6 @@ Now you can run it manually via actions page:
 
 ![](images/workflow.png)
 
-or if you want to do it from CLI, use [GitHub CLI](https://cli.github.com/) like this:
-
-```bash
-gh workflow run bump-request --field request_type=patch
-```
-
 After the action is complete, a new pull request is created:
 
 ![](images/pull-request.png)
