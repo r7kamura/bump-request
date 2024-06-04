@@ -55,17 +55,14 @@ This action simply creates a pull request and does nothing more. If you want to 
 Shell command for modifying files that contain versions such as package.json, Catgo.toml, etc.
 For supported types of packages, this will be handled automatically without specifying this,
 but if you are dealing with packages that are not, you will need to specify this.
+Note that the next version value is passed as an environment variable `VERSION` on running this command.
 
-Currently, the following types of packages are supported:
+Currently, the following types of packages are supported. If you have a well-known package that is missing, please send us a pull request:
 
 - crate
 - gem
 - npm
 - plain (where version is managed by VERSION file)
-
-If you have a well-known package that is missing, please send us a pull request.
-
-Note that the next version value is passed as an environment variable `VERSION` on running this command.
 
 ### `release_type`
 
