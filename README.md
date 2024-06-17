@@ -26,6 +26,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: r7kamura/bump-request@v0
         with:
           release_type: ${{ inputs.release_type }}
