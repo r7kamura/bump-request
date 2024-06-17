@@ -21,6 +21,9 @@ on:
           - minor
           - patch
         default: patch
+      version:
+        description: Enter this if you wish to specify the version directly.
+        type: string
 
 jobs:
   run:
@@ -30,6 +33,7 @@ jobs:
       - uses: r7kamura/bump-request@v0
         with:
           release_type: ${{ inputs.release_type }}
+          version: ${{ inputs.version }}
 ```
 
 Then allow your repository to create pull requests from GitHub Actions:
