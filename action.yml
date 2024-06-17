@@ -17,10 +17,14 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+      with:
+        repository: r7kamura/bump-request
+        path: bump-request
     - uses: denoland/setup-deno@v1
       with:
         deno-version: v1.x
-    - run: deno run --allow-all src/detectNextVersion.ts
+    - run: deno run --allow-all bump-request/src/detectNextVersion.ts
       env:
         BUMP_REQUEST_INPUTS_RELEASE_TYPE: ${{ inputs.release_type }}
         BUMP_REQUEST_INPUTS_VERSION: ${{ inputs.version }}
@@ -34,11 +38,11 @@ runs:
         VERSION: ${{ steps.detect_next_version.outputs.version }}
       shell: bash
     - if: ${{ !inputs.command }}
-      run: deno run --allow-all src/changeVersion.ts
+      run: deno run --allow-all bump-request/src/changeVersion.ts
       env:
         BUMP_REQUEST_VERSION: ${{ steps.detect_next_version.outputs.version }}
       shell: bash
-    - run: deno run --allow-all src/createPullRequest.ts
+    - run: deno run --allow-all bump-request/src/createPullRequest.ts
       env:
         BUMP_REQUEST_VERSION: ${{ steps.detect_next_version.outputs.version }}
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
