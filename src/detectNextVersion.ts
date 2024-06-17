@@ -23,7 +23,7 @@ if (releaseType) {
 
 core.setOutput(
   "version",
-  await detectNextVersion({
+  forcedVersion || await detectNextVersion({
     githubToken,
     githubOwner: github.context.repo.owner,
     githubRepo: github.context.repo.repo,
