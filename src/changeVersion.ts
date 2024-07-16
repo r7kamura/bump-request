@@ -42,8 +42,8 @@ function changeCrateVersion(version: string) {
 function changeGemVersion(version: string) {
   replaceContent(
     fs.expandGlobSync("lib/**/version.rb").next().value.path,
-    /VERSION = "[^"]+"/,
-    `VERSION = "${version}"`,
+    /VERSION = (['"]).*?\1/,
+    `VERSION = '${version}'`,
   );
   exec.exec("bundle", ["install"]);
 }
