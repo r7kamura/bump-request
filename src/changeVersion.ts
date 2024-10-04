@@ -47,11 +47,10 @@ function changeCrateVersion(version: string) {
 
 function changeCsprojVersion(version: string) {
   replaceContent(
-    fs.expandGlobSync("**/*.rb").next().value.path,
-    /<VersionPrefix>[^<]+<\/VersionPrefix>/,
-    `<VersionPrefix>${version}</VersionPrefix>`,
+    fs.expandGlobSync("**/*.csproj").next().value.path,
+    /<Version>[^<]+<\/Version>/,
+    `<Version>${version}</Version>`,
   );
-  exec.exec("dotnet", ["restore"]);
 }
 
 function changeGemVersion(version: string) {
