@@ -5,6 +5,8 @@ const version = Deno.env.get("BUMP_REQUEST_VERSION")!;
 
 if (checkCratePackage()) {
   changeCrateVersion(version);
+} else if (checkCsprojPackage()) {
+  changeCsprojVersion(version);
 } else if (checkGemPackage()) {
   changeGemVersion(version);
 } else if (checkNpmPackage()) {
@@ -17,6 +19,10 @@ if (checkCratePackage()) {
 
 function checkCratePackage() {
   return fs.existsSync("Cargo.toml");
+}
+
+function checkCsprojPackage() {
+  return fs.expandGlobSync("**/*.csproj").next().value !== undefined;
 }
 
 function checkGemPackage() {
@@ -37,6 +43,15 @@ function changeCrateVersion(version: string) {
     /version = "[^"]+"/,
     `version = "${version}"`,
   );
+}
+
+function changeCsprojVersion(version: string) {
+  replaceContent(
+    fs.expandGlobSync("**/*.rb").next().value.path,
+    /<VersionPrefix>[^<]+<\/VersionPrefix>/,
+    `<VersionPrefix>${version}</VersionPrefix>`,
+  );
+  exec.exec("dotnet", ["restore"]);
 }
 
 function changeGemVersion(version: string) {
