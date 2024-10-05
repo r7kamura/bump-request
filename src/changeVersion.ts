@@ -46,12 +46,13 @@ function changeCrateVersion(version: string) {
 }
 
 function changeCsprojVersion(version: string) {
+  const csprojPath = fs.expandGlobSync("**/*.csproj").next().value.path;
   replaceContent(
-    fs.expandGlobSync("**/*.csproj").next().value.path,
+    csprojPath,
     /<Version>[^<]+<\/Version>/,
     `<Version>${version}</Version>`,
   );
-  exec.exec("dotnet", ["restore"]);
+  exec.exec("dotnet", ["restore", csprojPath]);
 }
 
 function changeGemVersion(version: string) {
