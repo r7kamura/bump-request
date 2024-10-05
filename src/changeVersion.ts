@@ -43,6 +43,7 @@ function changeCrateVersion(version: string) {
     /version = "[^"]+"/,
     `version = "${version}"`,
   );
+  exec.exec("dotnet", ["restore"]);
 }
 
 function changeCsprojVersion(version: string) {
