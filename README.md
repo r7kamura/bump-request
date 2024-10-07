@@ -60,6 +60,7 @@ This action simply creates a pull request and does nothing more. If you want to 
 Currently, the following types of packages are officially supported.
 
 - crate
+- csproj (only `Version` attribute supported)
 - gem
 - npm
 - plain (where version is managed by VERSION file)
