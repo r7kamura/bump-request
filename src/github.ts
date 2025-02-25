@@ -1,4 +1,9 @@
 import { github } from "./deps.ts";
+import { performance } from "node:perf_hooks";
+
+// Workaround for deno compatibility issue on undici:
+// deno-lint-ignore no-explicit-any
+(globalThis as any).performance = performance;
 
 export function generateNotes({
   githubToken,
