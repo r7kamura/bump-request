@@ -22,12 +22,13 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
       - uses: r7kamura/bump-request@v0
         with:
           command: echo "$VERSION" > VERSION
           version: ${{ inputs.version }}
 ```
+
+This action checks out your repository by itself, so you do not need `actions/checkout` before it.
 
 Then allow your repository to create pull requests from GitHub Actions:
 
@@ -85,3 +86,9 @@ command: npm version "$VERSION" --no-git-tag-version
 Required. The next version to bump to.
 
 - e.g. `1.2.3`
+
+### `github_token`
+
+Optional. GitHub access token. Defaults to `github.token`.
+
+If `command` or `version` is empty, the action fails with an error such as `command input is required.`
