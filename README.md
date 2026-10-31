@@ -59,7 +59,8 @@ For a gem:
 
 ```yaml
 command: |
-  sed -i -E "s/VERSION = (['\"]).*(['\"])/VERSION = '$VERSION'/" lib/foo/version.rb
+  version_file=$(find lib -name version.rb)
+  sed -i -E "s/VERSION = (['\"]).*(['\"])/VERSION = '$VERSION'/" "$version_file"
   bundle install
 ```
 
