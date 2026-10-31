@@ -13,16 +13,9 @@ name: bump-request
 on:
   workflow_dispatch:
     inputs:
-      release_type:
-        type: choice
-        description: How to bump the version.
-        options:
-          - major
-          - minor
-          - patch
-        default: patch
       version:
-        description: Enter this if you wish to specify the version directly.
+        description: Next version (e.g. 1.2.3).
+        required: true
         type: string
 
 jobs:
@@ -32,7 +25,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: r7kamura/bump-request@v0
         with:
-          release_type: ${{ inputs.release_type }}
           version: ${{ inputs.version }}
 ```
 
@@ -68,21 +60,8 @@ Currently, the following types of packages are officially supported.
 If you want to handle other types of packages, you need to specify this option.
 Note that the next version value is passed as an environment variable `VERSION` on running this command.
 
-### `release_type`
-
-How to bump the version.
-
-One of:
-
-- `major`
-- `minor`
-- `patch`
-
-The next version is calculated based on the latest GitHub release,
-so your repository must manage its versions with GitHub releases.
-
 ### `version`
 
-You can also specify this directly instead of `release_type`.
+Required. The next version to bump to.
 
 - e.g. `1.2.3`
