@@ -12,8 +12,8 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: ./
+      - uses: actions/checkout@v7.0.1
+      - uses: $/
         with:
           command: echo "$VERSION" > VERSION
           version: ${{ inputs.version }}
