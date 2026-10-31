@@ -25,6 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: r7kamura/bump-request@v0
         with:
+          command: echo "$VERSION" > VERSION
           version: ${{ inputs.version }}
 ```
 
@@ -49,16 +50,35 @@ This action simply creates a pull request and does nothing more. If you want to 
 
 ### `command`
 
-Currently, the following types of packages are officially supported.
+Required. Shell script to update files that contain the version.
 
-- crate
-- csproj (only `Version` attribute supported)
-- gem
-- npm
-- plain (where version is managed by VERSION file)
+The next version is passed as an environment variable `VERSION`.
 
-If you want to handle other types of packages, you need to specify this option.
-Note that the next version value is passed as an environment variable `VERSION` on running this command.
+For a gem:
+
+```yaml
+command: |
+  sed -i -E "s/VERSION = (['\"]).*(['\"])/VERSION = '$VERSION'/" lib/foo/version.rb
+  bundle install
+```
+
+For a plain version file:
+
+```yaml
+command: echo "$VERSION" > VERSION
+```
+
+For a crate:
+
+```yaml
+command: sed -i -E "0,/^version = \"[^\"]+\"/s//version = \"$VERSION\"/" Cargo.toml
+```
+
+For an npm package:
+
+```yaml
+command: npm version "$VERSION" --no-git-tag-version
+```
 
 ### `version`
 
