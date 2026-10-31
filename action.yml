@@ -14,26 +14,13 @@ runs:
   using: composite
   steps:
     - uses: actions/checkout@v4
-    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        repository: r7kamura/bump-request
-        path: bump-request
-    - uses: denoland/setup-deno@v1
-      with:
-        deno-version: v2.x
-    - run: deno run --allow-all bump-request/src/detectNextVersion.ts
+        node-version: 24
+    - run: node "${{ github.action_path }}/dist/index.js"
       env:
+        BUMP_REQUEST_INPUTS_COMMAND: ${{ inputs.command }}
         BUMP_REQUEST_INPUTS_VERSION: ${{ inputs.version }}
-      shell: bash
-      id: detect_next_version
-    - run: |
-        ${{ inputs.command }}
-      env:
-        VERSION: ${{ steps.detect_next_version.outputs.version }}
-      shell: bash
-    - run: deno run --allow-all bump-request/src/createPullRequest.ts
-      env:
-        BUMP_REQUEST_VERSION: ${{ steps.detect_next_version.outputs.version }}
         GITHUB_TOKEN: ${{ inputs.github_token || github.token }}
       shell: bash
 branding:
